@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">
-          立即创建{{ruleForm}}
+          立即创建
         </el-button>
       </el-form-item>
     </el-form>
@@ -20,14 +20,18 @@
 <script>
 import { reactive, ref, toRefs } from "vue";
 import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
+
 export default {
   name: "login",
   setup(props) {
+    var router = useRouter();
+
     const ruleForm = reactive({
-      account: "",
-      password: "",
+      account: "admin",
+      password: "123",
     });
-    console.log("ruleForm", ruleForm);
+    // console.log("ruleForm", ruleForm);
 
     // const account = ref("");
     // const password = ref("");
@@ -43,6 +47,7 @@ export default {
       } else {
         if (account === "admin" && password) {
           ElMessage.success("登录成功");
+          router.push("/console");
         } else {
           ElMessage.error("账户密码错误");
         }
